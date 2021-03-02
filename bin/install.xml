@@ -1,0 +1,148 @@
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+<!--INFORMACION GENERAL DEL INSTALADOR-->
+  <info>
+    <appname>FirmaDigitalMultiplataforma</appname>
+    <appversion>1.0</appversion>
+    <authors>
+			<author name="MigracionSoftwareLibreUCR" email="soporte.migracion@ucr.ac.cr"/>
+      <author name="Xavier Marchena" email="xavier.marchena@ucr.ac.cr"/>
+		</authors>
+    <javaversion>1.6</javaversion>
+  </info>
+
+  <!--IDIOMA DEL INSTALADOR-->
+  <locale>
+    <langpack iso3="spa"/>
+  </locale>
+
+<!--PROPIEDADES DE LA INTERFAZ GRAFICA DEL INSTALADOR-->
+  <guiprefs width="800" height="600" resizable="no">
+
+  </guiprefs>
+
+<!-- RECURSOS USADOS POR EL INSTALADOR-->
+  <resources>
+    <res id="userInputSpec.xml" src="userinput-files/userInputSpec.xml" type="xml"/>
+    <res id="ProcessPanel.Spec.xml" src="process-files/ProcessPanel.Spec.xml" type="xml"/>
+    <res id="userInputLang.xml_spa" src="userinput-files/userInputLang.xml_spa" />
+    <res id="packsLang.xml_spa" src="gui-files/packsLang.xml_spa" />
+    <res id="customicons.xml" src="gui-files/customicons.xml" />
+    <res id="JFrameIcon" src="install-files/images/JFrameIcon.png" />
+    <res id="HTMLInfoPanel.readme" src="install-files/docs/readme.html" parse="yes"/>
+    <res id="LicencePanel.licence" src="install-files/legal/License.txt" />
+    <res id="Installer.image" src="install-files/images/firmadigital_msl.png"/>
+  </resources>
+
+<!--PANELES DEL INSTALADOR-->
+  <panels>
+    <panel classname="HelloPanel"/>
+    <panel classname="HTMLInfoPanel" id="readme" />
+    <panel classname="LicencePanel"/>
+    <panel classname="TargetPanel"/>
+    <panel classname="PacksPanel"/>
+    <panel classname="UserInputPanel" id="panel1">
+    <os family="linux"/>
+    </panel>
+    <panel classname="InstallPanel"/>
+    <panel classname="ProcessPanel"/>
+    <panel classname="FinishPanel"/>
+  </panels>
+
+<!--PAQUETES A INSTALAR-->
+<packs>
+<!-- WINDOWS/LINUX/MAC -->
+    <pack name="Firma_CI.oxt" required="no" preselected="yes" hidden="false">
+     <description>Extensión LibreOffice para Firma Digital desarrollada por el Centro de Informática de la Universidad de Costa Rica. Más información en: https://ci.ucr.ac.cr/firmadigital</description>
+     <file src="install-files/oxt/Firma_CI.oxt" targetdir="$INSTALL_PATH" override="true"/>
+     <os family="linux"/>
+     <os family="windows"/>
+     <os family="mac"/>
+    </pack>
+
+<!-- WINDOWS -->
+    <pack name="sfd_Windows_rev50.exe" required="yes" preselected="yes" hidden="false">
+     <description>Instalador de Firma Digital para Windows desarrollado por https://www.soportefirmadigital.com/web/es/.</description>
+     <file src="install-files/exe/sfd_Windows_rev50.exe" targetdir="$INSTALL_PATH" override="true"/>
+     <os family="windows"/>
+    </pack>
+
+     <pack name="instalacion_windows.bat" required="yes" preselected="yes" hidden="false">
+     <description>Script de instalación en Windows.</description>
+     <file src="install-files/bat/instalacion_windows.bat" targetdir="$INSTALL_PATH" override="true"/>
+     <os family="windows"/>
+     <parsable type="plain">
+          <fileset targetdir="$INSTALL_PATH" includes="instalacion_windows.bat" />
+     </parsable>
+    </pack>
+
+    <pack name="instalacion_windows_extlo.bat" required="yes" preselected="yes" hidden="false">
+    <description>Script de instalación en Windows.</description>
+    <file src="install-files/bat/instalacion_windows_extlo.bat" targetdir="$INSTALL_PATH" override="true"/>
+    <os family="windows"/>
+    <parsable type="plain">
+         <fileset targetdir="$INSTALL_PATH" includes="instalacion_windows_extlo.bat" />
+    </parsable>
+   </pack>
+
+
+     <pack name="desinstalacion_windows.bat" required="yes" preselected="yes" hidden="false">
+     <description>Script de desinstalación en Windows.</description>
+     <file src="install-files/bat/desinstalacion_windows.bat" targetdir="$INSTALL_PATH" override="true"/>
+     <executable targetfile="$INSTALL_PATH/desinstalacion_windows.bat" type="bin" stage="uninstall" failure ="warn" keep="true"/>
+     <os family="windows"/>
+     <parsable type="plain">
+          <fileset targetdir="$INSTALL_PATH" includes="desinstalacion_windows.bat" />
+     </parsable>
+    </pack>
+
+<!-- LINUX  -->
+ <pack name="instalacion_linux_extlo.sh" required="yes" preselected="yes" hidden="false">
+     <description>Script de instalación del complemento Firma Digital para LibreOffice.</description>
+     <file src="install-files/sh/instalacion_linux_extlo.sh" targetdir="$INSTALL_PATH" override="true"/>
+     <executable targetfile="$INSTALL_PATH/instalacion_linux_extlo.sh" type="bin" stage="never" failure ="warn" keep="true"/>
+     <os family="linux"/>
+     <parsable type="shell">
+      <fileset targetdir="$INSTALL_PATH" includes="instalacion_linux_extlo.sh" />
+     </parsable>
+    </pack>
+
+    <pack name="instalacion_linux.sh" required="yes" preselected="yes" hidden="false">
+     <description>Script de instalación de paquetes. Hace uso de los instaladores desarrollados por https://github.com/luisza/instaladoresFirmaDigitalCR.</description>
+     <file src="install-files/sh/instalacion_linux.sh" targetdir="$INSTALL_PATH" override="true"/>
+     <executable targetfile="$INSTALL_PATH/instalacion_linux.sh" type="bin" stage="never" failure ="warn" keep="true"/>
+     <os family="linux"/>
+     <parsable type="shell">
+      <fileset targetdir="$INSTALL_PATH" includes="instalacion_linux.sh" />
+     </parsable>
+    </pack>
+
+
+    <pack name="postinstalacion_linux.sh" required="yes" preselected="yes" hidden="false">
+    <description>Script de postinstalacion en sistemas operativos Linux.</description>
+    <file src="install-files/sh/postinstalacion_linux.sh" targetdir="$INSTALL_PATH" override="true"/>
+    <executable targetfile="$INSTALL_PATH/postinstalacion_linux.sh" type="bin" stage="never" failure ="warn" keep="true"/>
+    <os family="linux"/>
+    <parsable type="shell">
+     <fileset targetdir="$INSTALL_PATH" includes="postinstalacion_linux.sh" />
+    </parsable>
+    </pack>
+
+
+     <pack name="desinstalacion_linux.sh" required="yes" preselected="yes" hidden="false">
+     <description>Script de desinstalación en sistemas operativos Linux (Se ejecuta con: java -jar uninstaller.jar).</description>
+     <file src="install-files/sh/desinstalacion_linux.sh" targetdir="$INSTALL_PATH" override="true"/>
+     <executable targetfile="$INSTALL_PATH/desinstalacion_linux.sh" type="bin" stage="never" failure ="warn" keep="true"/>
+     <executable targetfile="$INSTALL_PATH/desinstalacion_linux.sh" type="bin" stage="uninstall" failure ="warn" keep="true"/>
+     <os family="linux"/>
+     <parsable type="shell">
+      <fileset targetdir="$INSTALL_PATH" includes="desinstalacion_linux.sh" />
+     </parsable>
+     </pack>
+
+</packs>
+
+<!--Seccion packs-->
+</izpack:installation>

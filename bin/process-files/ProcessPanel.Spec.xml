@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<izpack:processing version="5.0"
+  xmlns:izpack="http://izpack.org/schema/processing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://izpack.org/schema/processing http://izpack.org/schema/5.0/izpack-processing-5.0.xsd">
+
+    <job name="Instalación de paquetes">
+      <os family="linux" />
+      <executefile name="$INSTALL_PATH/instalacion_linux.sh">
+      <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+      </executefile>
+    </job>
+
+<!-- TODO: Manejar error si no esta -->
+    <job name="Instalación de extensión LibreOffice">
+      <os family="linux" />
+      <executefile name="$INSTALL_PATH/instalacion_linux_extlo.sh">
+      <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+      </executefile>
+    </job>
+
+    <!-- <onFail previous="false" next="true" />
+    <job name="Script en fail" catch="true">
+      <os family="linux" />
+      <executefile name="$INSTALL_PATH/instalacion_linux_fail.sh">
+      <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+      </executefile>
+    </job>
+     -->
+
+     <job name="Script final para limpiar archivos" final="true">
+       <os family="linux" />
+       <executefile name="$INSTALL_PATH/postinstalacion_linux.sh">
+         <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+       </executefile>
+     </job>
+
+<!-- TODO: Final para windows -->
+
+
+<!-- WINDOWS -->
+    <job name=" Ejecución de instalador">
+      <os family="windows" />
+      <executefile name="$INSTALL_PATH/instalacion_windows.bat">
+      <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+      </executefile>
+    </job>
+
+    <job name="Instalación de extensión LibreOffice">
+      <os family="windows" />
+      <executefile name="$INSTALL_PATH/instalacion_windows_extlo.bat">
+      <arg>$INSTALL_PATH</arg><arg>$panel1.adminpassword</arg>
+      </executefile>
+    </job>
+
+</izpack:processing>
