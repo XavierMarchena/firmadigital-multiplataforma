@@ -28,7 +28,7 @@ sudo cp -R bin/. /path/to/IzPack/bin/
 _Una vez que estén todos los archivos completos, se debe proceder a compilar el proyecto para generar un instalador en formato .JAR_
 
 ```
-./compile ej-install.xml -o EjemploInstaladorIzpack.jar
+./compile install.xml -o FirmaDigitalMultiplataformav1_0.jar
 
 ```
 
@@ -39,3 +39,5 @@ _El instalador se ejecuta como una aplicación java con el siguiente comando:_
 java -jar FirmaDigitalMultiplataformav1_0.jar
 
 ```
+### Demo 🚀
+![](fdmp_ubuntu.gif)
