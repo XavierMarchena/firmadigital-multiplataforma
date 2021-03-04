@@ -39,5 +39,5 @@ _El instalador se ejecuta como una aplicación java con el siguiente comando:_
 java -jar FirmaDigitalMultiplataformav1_0.jar
 
 ```
-### Demo 🚀
+### Demo :desktop_computer:
 ![](fdmp_ubuntu.gif)
